@@ -37,24 +37,39 @@ app.get('/listas',(req,res)=>{
       }
     }) 
 })
+
 //bucar por id
 app.get('/listas/:id',(req,res)=>{
-  let id = req.params.id
-  const sql = `SELECT * FROM alunos WHERE alunos_id = ${id};`
-  conexao.query(sql, (error,result)=>{
-    if (error) {
+  let id = parseInt(req.params.id)
+  const sql = "SELECT * FROM alunos WHERE alunos_id = ?;"
+  conexao.query(sql, id, (error,result)=>{
+    const row = result[0]
+    if (row == null) {
       console.log(error)
-      res.status(404).json({'error':error})
+      res.status(404).json({"Alunos":error})
+
     } else {
-      res.status(200).send(result);
+      res.status(200).send(row);
     }
   })
-    // res.json(buscarAlunoporId(req.params.id));
+    // res.json(buscarAlunoporId(id));
 })
+
 //criar
 app.post('/listas',(req,res)=>{
-    listas.push(req.body)
-    res.status(201).send('Aluno cadastrdo com sucesso!')
+    // listas.push(req.body)
+    const aluno = req.body
+    const sql = "INSERT INTO `dbsenac`.`alunos` SET ?;"
+    conexao.query(sql, aluno, (error,result)=>{
+      if (error) {
+        console.log(error)
+        res.status(404).json(error)
+  
+      } else {
+        // res.status(200).send(row);
+        res.status(201).send({"cadastrado com sucesso": aluno})
+      }
+    })
 })
 
 
