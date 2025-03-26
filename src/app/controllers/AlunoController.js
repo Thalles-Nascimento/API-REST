@@ -1,20 +1,11 @@
-import conexao from "../database/index.js";
+import AlunoRepository from "../repositories/AlunoRepository.js";
 
 class AlunoController{
 
     // GET all
     index(req, res){
-        const sql = "SELECT * FROM alunos;"
-
-        conexao.query(sql, (error,result)=>{
-
-            if (error) {
-                res.status(404).json({'error':error})
-            } else {
-                res.status(200).send(result);
-            }
-
-        })
+        const row = AlunoRepository.findAll() 
+        res.json(row)
     }
 
     // GET id

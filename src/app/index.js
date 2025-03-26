@@ -31,8 +31,8 @@ app.delete('/listas2/:id', AlunoController.delete2)
 
 
 // UPDATE e UPDATE V2
-app.put('update/:id', AlunoController.update)
-app.put('atualizar/:id', AlunoController.update2)
+app.put('/atualizar/:id', AlunoController.update)
+app.put('/atualizar2/:id', AlunoController.update2)
 
 //Expor o objeto para outras rotas 
 export default app
