@@ -1,18 +1,145 @@
+import conexao from "../database/index.js";
+
 class AlunoController{
 
     // GET all
-    index(){}
+    index(req, res){
+        const sql = "SELECT * FROM alunos;"
+
+        conexao.query(sql, (error,result)=>{
+
+            if (error) {
+                res.status(404).json({'error':error})
+            } else {
+                res.status(200).send(result);
+            }
+
+        })
+    }
 
     // GET id
-    show(){}
+    show(req, res){
+        let id = parseInt(req.params.id)
+        const sql = "SELECT * FROM alunos WHERE alunos_id = ?;"
+
+        conexao.query(sql, id, (error,result)=>{
+            const row = result[0]
+            if (row == null) {
+            console.log(error)
+            res.status(404).json({"Alunos":error})
+
+            } else {
+            res.status(200).send(row);
+            }
+        })
+    }
 
     // INSERT/CREATE
-    store(){}
+    store(req, res){
+        const aluno = req.body
+        const sql = "INSERT INTO `dbsenac`.`alunos` SET ?;"
+
+        conexao.query(sql, aluno, (error, result)=>{
+          if (error) {
+            console.log(error)
+            res.status(404).json(error)
+      
+          } else {
+            res.status(201).send({"cadastrado com sucesso": aluno})
+          }
+        })        
+    }
 
     // UPDATE
-    update(){}
+    update(req, res){
+        const id = req.params.id
+        const aluno = req.body
+    
+        const checkSQL = "SELECT * FROM alunos WHERE alunos_id = ?;"
+        conexao.query(checkSQL, [id], (error,result)=>{
+          if (error) {
+            console.log(error)
+            res.status(404).json({'message': error})
+          }
+
+          if (result === 0) {
+            console.log(error)
+            res.status(404).json({'Message': `Aluno com id ${id} não encontrado`})
+          }
+    
+        const sql = 'UPDATE dbsenac.alunos SET ? WHERE alunos_id = ?;'
+        conexao.query(sql, [aluno, id], (error, result) =>{
+          const row = result[0]
+          if (error){
+            console.log(error)
+            return res.status(500).json({'Error': 'Erro interno no servidor', 'Details': error})
+          }
+    
+          if (update.affectedRows === 0){
+            res.status(404).json({'Message': `Aluno com id ${id} não encontrado`})
+          }
+    
+          res.status(200).json({'Message':`Aluno com id ${id} Atualizado`})
+        })
+      })        
+    }
+
+    update2(req, res){
+      const id = req.params.id
+      const aluno = req.body
+      const sql = 'UPDATE `dbsenac`.`alunos` SET ? WHERE alunos_id = ?;'
+    
+      conexao.query(sql, [aluno, id], (error, result) =>{
+        const row = result[0]
+        if (error){
+          console.log(error)
+          return res.status(500).json({'Error': 'Erro interno no servidor', 'Details': error})
+        }
+    
+        if (update.affectedRows === 0){
+          res.status(404).json({'Message': `Aluno com id ${id} não encontrado`})
+        }
+    
+        res.status(200).json({'Message':`Aluno com id ${id} Atualizado`})
+      })
+    }
 
     // DELETE
-    delete(){}
+    delete(req, res){
+        const id = req.params.id
+        const sql = "DELETE FROM dbsenac.alunos WHERE alunos_id = ?;"
+
+        conexao.query(sql, [id], (error, result)=>{
+          const row = result[0]
+          if (row == null) {
+            console.log(error)
+            res.status(404).send(error)
+      
+          } else {
+            res.status(200).send("Aluno deletado")
+          }
+        })
+    }
+
+    // DELETE 2
+    delete2(req, res){
+        const id = req.params.id
+        const sql = "DELETE FROM dbsenac.alunos WHERE alunos_id = ?;"
+      
+        conexao.query(sql, [id], (error, result)=>{
+          if (error){
+            return res.status(500).json({'Error': 'Erro interno no servidor', 'Details': error})
+          }
+      
+          if (result.affectedRows === 0){
+            return res.status(404).json({'message': `Aluno com ID ${id} não encontrado`})
+          }
+      
+          res.status(200).json({'message': `Aluno com id ${id} excluido com sucesso.`})
+        })    
+    }
 
 }
+
+// Padrão Singleton -> Designer Patterns
+export default new AlunoController()
