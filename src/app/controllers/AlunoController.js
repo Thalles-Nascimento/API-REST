@@ -1,5 +1,5 @@
 import AlunoRepository from "../repositories/AlunoRepository.js";
-
+// Métodos assíncronos: async e await
 class AlunoController{
 
     // GET all
