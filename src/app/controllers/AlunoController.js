@@ -4,7 +4,8 @@ class AlunoController{
 
     // GET all
     index(req, res){
-        const row = AlunoRepository.findAll() 
+        const row = AlunoRepository.findAll()
+        console.log(row)
         res.json(row)
     }
 

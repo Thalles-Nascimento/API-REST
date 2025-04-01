@@ -2,18 +2,16 @@ import conexao from "../database/index.js";
 
 class AlunoRepository {
 
-    // Buscar todos
-    async findAll(){
+    // Buscar tudo
+    findAll(){
         const sql = "SELECT * FROM alunos;"
 
-        conexao.query(sql, (error,result)=>{
-
-            if (error) {
-                return 'Erro: ', error
-            } else {
-                return result
-            }
-
+        // Promise possui dois parâmetros: Resolve(sucesso) e Reject(erro)
+        return new Promise((resolve, reject)=>{
+            conexao.query(sql, (error, result)=>{
+                if (error) return reject('Erro: ', error)
+                return resolve(result)            
+            })
         })
     }
 
