@@ -18,6 +18,19 @@ class AlunoRepository {
         })
     }
 
+    // Buscar por ID
+    findById(id){
+        const sql = "SELECT * FROM alunos WHERE alunos_id = ?;"
+
+        return new Promise((resolve, reject) =>{
+            conexao.query(sql, id, (error,result)=>{
+                const row = result[0]
+                if (error) return reject("Aluno não encontrado")
+                return resolve(row)
+            })
+        })
+    }
+
     // Criar um novo elemento
     create(aluno){
         const sql = "INSERT INTO `dbsenac`.`alunos` SET ?;"
@@ -29,23 +42,18 @@ class AlunoRepository {
         })
     }
 
-
-    // Buscar por ID
-    findById(id){
-        const sql = "SELECT * FROM alunos WHERE alunos_id = ?;"
-
-        return new Promise((resolve, reject) =>{
-            conexao.query(sql, id, (error,result)=>{
+    // Atualizar
+    update(aluno, id){
+        const sql = 'UPDATE `dbsenac`.`alunos` SET ? WHERE alunos_id = ?;'
+        
+        return new Promise((resolve,reject)=>{
+            
+            conexao.query(sql, [aluno, id], (error, result) =>{
                 const row = result[0]
-                if (row == null) return reject("Aluno não encontrado")
-                return resolve(row)
+                if (error) return reject("Aluno não encontrado")
+                return resolve(`Aluno ${aluno.alunos_nome} foi atualizado`)
             })
         })
-    }
-
-    // Atualizar
-    update(){
-
     }
 
     // Delete
@@ -55,7 +63,7 @@ class AlunoRepository {
         return new Promise((resolve, reject) =>{
                 conexao.query(sql, id, (error, result)=>{
                 const row = result[0]
-                if (error) return reject(error)
+                if (error) return reject("Aluno não encontrado")
                 return resolve("Aluno deletado")
             })
         })
