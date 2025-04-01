@@ -78,20 +78,11 @@ class AlunoController{
     }
 
     // DELETE
-    delete(req, res){
-        const id = req.params.id
-        const sql = "DELETE FROM dbsenac.alunos WHERE alunos_id = ?;"
+    async delete(req, res){
+      let id = req.params.id
+      const row = await AlunoRepository.delete(id)
+      res.send(row)
 
-        conexao.query(sql, [id], (error, result)=>{
-          const row = result[0]
-          if (row == null) {
-            console.log(error)
-            res.status(404).send(error)
-      
-          } else {
-            res.status(200).send("Aluno deletado")
-          }
-        })
     }
 
     // DELETE 2

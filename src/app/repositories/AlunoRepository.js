@@ -49,11 +49,17 @@ class AlunoRepository {
     }
 
     // Delete
-    delete(){
+    delete(id){
+        const sql = "DELETE FROM `dbsenac`.`alunos` WHERE alunos_id = ?;"
 
+        return new Promise((resolve, reject) =>{
+                conexao.query(sql, id, (error, result)=>{
+                const row = result[0]
+                if (error) return reject(error)
+                return resolve("Aluno deletado")
+            })
+        })
     }
-
-
 }
 
 export default new AlunoRepository()
