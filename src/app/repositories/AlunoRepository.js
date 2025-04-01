@@ -10,7 +10,10 @@ class AlunoRepository {
         return new Promise((resolve, reject)=>{
             conexao.query(sql, (error, result)=>{
                 if (error) return reject('Erro: ', error)
-                return resolve(result)            
+                // Stringfy: Resultado de forma adequada
+                // JSON.stringify(result)
+                const row = JSON.parse(JSON.stringify(result))
+                return resolve(row)            
             })
         })
     }
@@ -22,8 +25,16 @@ class AlunoRepository {
 
 
     // Buscar por ID
-    findById(){
+    findById(id){
+        const sql = "SELECT * FROM alunos WHERE alunos_id = ?;"
 
+        return new Promise((resolve, reject) =>{
+            conexao.query(sql, id, (error,result)=>{
+                const row = result[0]
+                if (row == null) return reject("Aluno não encontrado")
+                return resolve(row)
+            })
+        })
     }
 
     // Atualizar

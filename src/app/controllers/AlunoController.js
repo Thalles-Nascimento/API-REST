@@ -3,27 +3,16 @@ import AlunoRepository from "../repositories/AlunoRepository.js";
 class AlunoController{
 
     // GET all
-    index(req, res){
-        const row = AlunoRepository.findAll()
-        console.log(row)
-        res.json(row)
+    async index(req, res){
+      const row = await AlunoRepository.findAll()
+      res.json(row)
     }
 
     // GET id
-    show(req, res){
-        let id = parseInt(req.params.id)
-        const sql = "SELECT * FROM alunos WHERE alunos_id = ?;"
-
-        conexao.query(sql, id, (error,result)=>{
-            const row = result[0]
-            if (row == null) {
-            console.log(error)
-            res.status(404).json({"Alunos":error})
-
-            } else {
-            res.status(200).send(row);
-            }
-        })
+    async show(req, res){
+      let id = parseInt(req.params.id)
+      const row = await AlunoRepository.findById(id)
+      res.json(row)
     }
 
     // INSERT/CREATE
