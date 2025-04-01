@@ -10,7 +10,7 @@ class AlunoController{
 
     // GET id
     async show(req, res){
-      let id = parseInt(req.params.id)
+      let id = req.params.id
       const row = await AlunoRepository.findById(id)
       res.json(row)
     }
