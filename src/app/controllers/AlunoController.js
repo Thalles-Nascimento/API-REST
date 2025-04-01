@@ -16,19 +16,11 @@ class AlunoController{
     }
 
     // INSERT/CREATE
-    store(req, res){
-        const aluno = req.body
-        const sql = "INSERT INTO `dbsenac`.`alunos` SET ?;"
-
-        conexao.query(sql, aluno, (error, result)=>{
-          if (error) {
-            console.log(error)
-            res.status(404).json(error)
-      
-          } else {
-            res.status(201).send({"cadastrado com sucesso": aluno})
-          }
-        })        
+    async store(req, res){
+      let aluno = req.body
+      const row = await AlunoRepository.create(aluno)
+      res.send(row)    
+        
     }
 
     // UPDATE

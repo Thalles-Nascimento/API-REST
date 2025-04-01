@@ -19,8 +19,14 @@ class AlunoRepository {
     }
 
     // Criar um novo elemento
-    create(){
-    
+    create(aluno){
+        const sql = "INSERT INTO `dbsenac`.`alunos` SET ?;"
+        return new Promise((resolve, reject) =>{
+            conexao.query(sql, aluno, (error, result)=>{
+                if (error) return reject(error)
+                return resolve("Aluno inserido")
+            })
+        })
     }
 
 
