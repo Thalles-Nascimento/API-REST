@@ -5,7 +5,7 @@ class AlunoRepository {
     // Buscar tudo
     findAll(){
         const sql_select_all = "SELECT * FROM alunos;"
-        return consulta(sql_select_all, "Alunos não encontrados")
+        return consulta(sql_select_all, '', "Alunos não encontrados")
     }
 
     // Buscar por ID
