@@ -23,7 +23,7 @@ class AlunoRepository {
     // Atualizar
     update(aluno, id){
         const sql_update = 'UPDATE `dbsenac`.`alunos` SET ? WHERE alunos_id = ?;'
-        return consulta(sql_update, [aluno, id], "Aluno não encontrado")
+        return consulta(sql_update, [aluno, id], "Não foi possível cadastrar")
     }
 
     // Delete
