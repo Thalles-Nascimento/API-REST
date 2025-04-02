@@ -1,17 +1,21 @@
-import conexao, { consulta } from "../database/index.js";
+import Db from "../database/db.js"
 
 class AlunoRepository {
 
+    construtor(){
+        this.db = Db('root', 'Dell@1984')
+    }
+
     // Buscar tudo
-    findAll(){
-        const sql_select_all = "SELECT * FROM alunos;"
-        return consulta(sql_select_all, '', "Alunos não encontrados")
+    async findAll(){
+        const row = await this.db.sql_select_all("Alunos não encontrados")
+        return row
     }
 
     // Buscar por ID
-    findById(id){
-        const sql_select_id = "SELECT * FROM alunos WHERE alunos_id = ?;"
-        return consulta(sql_select_id, id, "Aluno não encontrado")
+    async findById(id){
+        const row = await this.db.sql_select_id(id, "Aluno não encontrado")
+        return row
     }
 
     // Criar um novo elemento
