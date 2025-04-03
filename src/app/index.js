@@ -11,27 +11,17 @@ app.use(express.json())
 // GET
 app.get('/listas', AlunoController.index)
 
-
-
 //GET id
 app.get('/listas/:id', AlunoController.show)
-
-
 
 // POST
 app.post('/listas', AlunoController.store)
 
-
-
 // DELETE e DELETE 2
 app.delete('/listas/:id', AlunoController.delete)
-app.delete('/listas2/:id', AlunoController.delete2)
-
-
 
 // UPDATE e UPDATE V2
-app.put('/atualizar2/:id', AlunoController.update2)
-// app.put('/atualizar/:id', AlunoController.update)
+app.put('/atualizar/:id', AlunoController.update)
 
 //Expor o objeto para outras rotas 
 export default app
