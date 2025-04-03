@@ -1,24 +1,32 @@
 import AlunoRepository from "../repositories/AlunoRepository.js";
+import Db from "../database/db.js" 
+
 // Métodos assíncronos: async e await
 class AlunoController{
 
+    constructor() {
+      const db = new Db()
+      db.conectar(process.env.DB_USER, process.env.DB_PASSWORD)
+      this.alunoRepository = new AlunoRepository(db);
+    }
+
     // GET all
     async index(req, res){
-      const row = await AlunoRepository.findAll()
+      const row = await this.alunoRepository.findAll()
       res.json(row)
     }
 
     // GET id
     async show(req, res){
       let id = req.params.id
-      const row = await AlunoRepository.findById(id)
+      const row = await this.alunoRepository.findById(id)
       res.json(row)
     }
 
     // INSERT/CREATE
     async store(req, res){
       let aluno = req.body
-      const row = await AlunoRepository.create(aluno)
+      const row = await this.alunoRepository.create(aluno)
       res.send(row)    
         
     }
@@ -60,14 +68,14 @@ class AlunoController{
     async update2(req, res){
       let aluno = req.body
       let id = req.params.id
-      const row = await AlunoRepository.update(aluno, id)
+      const row = await this.alunoRepository.update(aluno, id)
       res.json(row)
     }
 
     // DELETE
     async delete(req, res){
       let id = req.params.id
-      const row = await AlunoRepository.delete(id)
+      const row = await this.alunoRepository.delete(id)
       res.send(row)
 
     }

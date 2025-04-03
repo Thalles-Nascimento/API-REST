@@ -36,7 +36,7 @@ class Db{
 
 
 
-export default new Db()
+export default Db
 
 /**
  * Executa o código SQL com ou sem argumentos
