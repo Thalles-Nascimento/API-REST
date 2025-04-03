@@ -1,4 +1,3 @@
-// TODO: Realizar em casa
 import Conexao from "./index.js"
 
 
@@ -32,8 +31,6 @@ class Db{
 
     }
 }
-
-
 
 
 export default Db

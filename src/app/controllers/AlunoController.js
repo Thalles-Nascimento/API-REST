@@ -1,8 +1,5 @@
 import AlunoRepository from "../repositories/AlunoRepository.js";
-import Db from "../database/db.js" 
-import dotenv from 'dotenv'
 
-dotenv.config()
 // Métodos assíncronos: async e await
 class AlunoController{
 
