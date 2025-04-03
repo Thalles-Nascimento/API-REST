@@ -3,7 +3,8 @@ import Conexao from "./index.js"
 
 
 class Db{
-    constructor(login, pass){
+
+    conectar(login, pass){
         this.con = Conexao.connect(login, pass)
     }
 

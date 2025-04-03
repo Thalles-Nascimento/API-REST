@@ -1,9 +1,15 @@
 import Db from "../database/db.js"
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 class AlunoRepository {
 
-    construtor(){
-        this.db = Db('root', 'Dell@1984')
+    constructor(){
+        const login = process.env.DB_USER
+        const password = process.env.DB_PASSWORD
+        this.db = Db
+        this.db.conectar(login, password)
     }
 
     // Buscar tudo
