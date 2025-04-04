@@ -9,13 +9,14 @@ routers.get_all()
 routers.get_by_id()
 
 // POST
-// router.post('/listas', AlunoController.store)
+routers.insert()
 
-// // DELETE e DELETE 2
-// router.delete('/listas/:id', AlunoController.delete)
+// UPDATE
+routers.update()
 
-// // UPDATE e UPDATE V2
-// router.put('/atualizar/:id', AlunoController.update)
+// DELETE
+routers.delete()
+
 
 //Expor o objeto para outras rotas 
 export default routers

@@ -10,7 +10,8 @@ class Router{
 
     listen(port){
         this.router.listen(port,() =>{
-            console.log(`Servidor rodando no endereço http://localhost:${port}`)
+            console.log("Conexão estabelecida")
+            console.log(`Endereço: http://localhost:${port}`)
         })
 
     }
@@ -21,6 +22,18 @@ class Router{
 
     get_by_id(){
         this.router.get('/listas/:id', AlunoController.show)
+    }
+
+    insert(){
+        this.router.post('/listas', AlunoController.store)
+    }
+
+    update(){
+        this.router.put('/listas/:id', AlunoController.update)
+    }
+
+    delete(){
+        this.router.delete('/listas/:id', AlunoController.delete)
     }
 
 }

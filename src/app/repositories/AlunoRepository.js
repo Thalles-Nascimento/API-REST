@@ -24,21 +24,21 @@ class AlunoRepository {
     }
 
     // Criar um novo elemento
-    create(aluno){
-        const sql_insert = "INSERT INTO `dbsenac`.`alunos` SET ?;"
-        return consulta(sql_insert, aluno, "Erro ao inserir")
+    async create(aluno){
+        const row = await this.db.sql_insert(aluno, "Não foi possível cadastrar")
+        return row
     }
 
     // Atualizar
-    update(aluno, id){
-        const sql_update = 'UPDATE `dbsenac`.`alunos` SET ? WHERE alunos_id = ?;'
-        return consulta(sql_update, [aluno, id], "Não foi possível cadastrar")
+    async update(aluno, id){
+        const row = await this.db.sql_update(aluno, id, "Aluno não encontrado")
+        return row
     }
 
     // Delete
-    delete(id){
-        const sql_delete = "DELETE FROM `dbsenac`.`alunos` WHERE alunos_id = ?;"
-        return consulta(sql_delete, id, "Aluno não encontrado")
+    async delete(id){
+        const row = await this.db.sql_delete(id, "Aluno não encontrado")
+        return row
     }
 }
 
