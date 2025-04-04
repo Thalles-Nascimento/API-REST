@@ -13,31 +13,31 @@ class AlunoRepository {
 
     // Buscar tudo
     async findAll(){
-        const row = await this.db.sql_select_all("Alunos não encontrados")
+        const row = await this.db.sql_select_all()
         return row
     }
 
     // Buscar por ID
     async findById(id){
-        const row = await this.db.sql_select_id(id, "Aluno não encontrado")
+        const row = await this.db.sql_select_id(id)
         return row
     }
 
     // Criar um novo elemento
     async create(aluno){
-        const row = await this.db.sql_insert(aluno, "Não foi possível cadastrar")
+        const row = await this.db.sql_insert(aluno)
         return row
     }
 
     // Atualizar
     async update(aluno, id){
-        const row = await this.db.sql_update(aluno, id, "Aluno não encontrado")
+        const row = await this.db.sql_update(aluno, id)
         return row
     }
 
     // Delete
     async delete(id){
-        const row = await this.db.sql_delete(id, "Aluno não encontrado")
+        const row = await this.db.sql_delete(id)
         return row
     }
 }
