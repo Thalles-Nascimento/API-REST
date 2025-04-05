@@ -23,9 +23,9 @@ class Db{
 
         return new Promise((resolve, reject) =>{
             this.con.query(select_id_sql, id, (error, result) =>{
-                const row = result[0]
+                // const row = result[0]
                 if(error) return reject(error.sqlMessage)
-                return resolve(row)
+                return resolve(result)
             })
         })
 
