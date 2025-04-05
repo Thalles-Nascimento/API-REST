@@ -6,27 +6,42 @@ dotenv.config()
 class AlunoRepository {
 
     constructor(){
-        this.db = new Db()
-        this.db.conectar(process.env.DB_USER, process.env.DB_PASSWORD)
-        // console.log(process.env.DB_USER, process.env.DB_PASSWORD)
+        this.db = new Db(process.env.DB_USER, process.env.DB_PASSWORD)
     }
 
     // Buscar tudo
     async findAll(){
-        const row = await this.db.sql_select_all()
-        return row
+        try{
+            const row = await this.db.sql_select_all()
+            return row
+        }
+        catch (erro){
+            return erro
+        }
+
     }
 
     // Buscar por ID
     async findById(id){
-        const row = await this.db.sql_select_id(id)
-        return row
+        try{
+            const row = await this.db.sql_select_id(id)
+            return row
+        }
+        catch (erro){
+            return erro
+        }
     }
 
     // Criar um novo elemento
     async create(aluno){
-        const row = await this.db.sql_insert(aluno)
-        return row
+        try{
+            const row = await this.db.sql_insert(aluno)
+            return row
+        }
+        catch (erro){
+            return erro
+        }
+
     }
 
     // Atualizar
