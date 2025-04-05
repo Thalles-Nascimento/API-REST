@@ -1,6 +1,10 @@
 import routers from "./src/app/app.js"
+import dotenv from 'dotenv'
 
-const port = 3000
+dotenv.config()
 
-// Escutando a porta 3000
-routers.listen(port)
+const patch = process.env.PATCH_SERVER
+const port = process.env.PORT_SERVER
+
+// Escutando a porta
+routers.listen(patch, port)

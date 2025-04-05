@@ -8,10 +8,10 @@ class Router{
         this.router.use(express.json())
     }
 
-    listen(port){
+    listen(patch, port){
         this.router.listen(port,() =>{
             console.log("Conexão estabelecida")
-            console.log(`Endereço: http://localhost:${port}`)
+            console.log(`Endereço: ${patch}:${port}`)
         })
 
     }
