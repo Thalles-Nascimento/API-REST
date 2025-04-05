@@ -1,22 +1,35 @@
 import Router from '../router.js'
 
+/**
+ * Instância da classe @Router
+ */
 const routers = Router
 
-// GET
+/**
+ * Método para acessar a rota que lista todos os registros do banco de dados
+ */
 routers.get_all()
 
-//GET id
+/**
+ * Método para acessar a rota que lista os registros com um determinado @ID
+ */
 routers.get_by_id()
 
-// POST
+/**
+ * Método para acessar a rota que insere registros no Banco de Dados
+ */
 routers.insert()
 
-// UPDATE
+/**
+ * Método para acessar a rota que atualiza registros no Banco de Dados
+ */
 routers.update()
 
-// DELETE
+/**
+ * Método para acessar a rota que deleta registros no Banco de Dados
+ */
 routers.delete()
 
 
-//Expor o objeto para outras rotas 
+//Expor a instância da classe Router
 export default routers

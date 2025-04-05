@@ -1,12 +1,26 @@
 import Conexao from "./conection.js"
 
-
+/**
+ * Classe de manipulação do Banco de Dados
+ * @author Thalles Nascimento
+ * @class
+ */
 class Db{
 
-    constructor(login, pass){
-        this.con = Conexao.connect(login, pass)
+    /**
+     * Método para conexão com o Banco de Dados
+     * @param {String} login Usuário do Banco de Dados
+     * @param {String | Number} key Senha do Banco de Dados
+     * @returns Retorna a conexão com o Banco de Dados
+     */
+    conection(login, pass){
+        this.con = Conexao.conection(login, pass)
     }
 
+    /**
+     * SQL: SELECT * FROM table 
+     * @returns Retorna todos os registros da tabela alunos
+     */
     sql_select_all(){
         const select_sql = "SELECT * FROM alunos;"
 
@@ -22,6 +36,11 @@ class Db{
         })
     }
 
+    /**
+     * SQL: SELECT * FROM table WHERE id_column = [ID] 
+     * @param {Number} id ID e um registro do Banco de Dados
+     * @returns Retorna um registro específico da tabela alunos
+     */
     sql_select_id(id){
         const select_id_sql = "SELECT * FROM alunos WHERE alunos_id = ?;"
 
@@ -39,6 +58,11 @@ class Db{
 
     }
 
+    /**
+     * SQL: INSERT INTO table SET [JSON]
+     * @param {JSON} aluno Dados para inserção no Banco de Dados
+     * @returns Retorna a inserção de um registro no Banco de Dados
+     */
     sql_insert(aluno){
         const insert_sql = "INSERT INTO alunos SET ?;"
 
@@ -55,6 +79,12 @@ class Db{
         })
     }
 
+    /**
+     * SQL: UPDATE table SET [JSON] WHERE id_column = [ID]
+     * @param {JSON} aluno Dados para Atualização no Banco de Dados
+     * @param {Number} id ID do registro à ser atualizado
+     * @returns Retorna a atualização de um registro no Banco de Dados
+     */
     async sql_update(aluno, id){
         let resultado
         try{
@@ -78,6 +108,11 @@ class Db{
         })
     }
 
+    /**
+     * SQL: DELETE FROM table WHERE id_column = [ID]
+     * @param {Number} id ID do registro à ser Deletado
+     * @returns Retorna um registro Deletado
+     */
     async sql_delete(id){
         let resultado
         try{
@@ -101,5 +136,8 @@ class Db{
     }
 }
 
-
-export default Db
+/**
+ * Padrão Singleton -> Designer Patterns
+ *      Foi criada e exportada apenas uma instância da classe Db
+ *  */ 
+export default new Db()
