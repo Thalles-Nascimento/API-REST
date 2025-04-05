@@ -1,4 +1,4 @@
-import routers from "./src/app/index.js"
+import routers from "./src/app/app.js"
 
 const port = 3000
 

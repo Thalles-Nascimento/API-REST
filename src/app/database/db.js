@@ -1,4 +1,4 @@
-import Conexao from "./index.js"
+import Conexao from "./conection.js"
 
 
 class Db{
