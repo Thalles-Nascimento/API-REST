@@ -3,7 +3,7 @@ import AlunoController from './app/controllers/AlunoController.js'
 
 
 /**
- * Classe Router - Criar rotas para APIs
+ * Classe reponsável por criar as rotas da API
  * @author Thalles Nascimento
  * @description Criar rotas para APIs configuradas na @class AlunoController
  * 
