@@ -13,8 +13,8 @@ class Db{
      * @param {String | Number} key Senha do Banco de Dados
      * @returns Retorna a conexão com o Banco de Dados
      */
-    conection(login, pass){
-        this.con = Conexao.conection(login, pass)
+    conection(login, pass, hostname, port,databases){
+        this.con = Conexao.conection(login, pass, hostname, port,databases)
     }
 
     /**

@@ -14,14 +14,14 @@ class Conexao{
      * @param {String | Number} key Senha do Banco de Dados
      * @returns Retorna a conexão com o Banco de Dados
      */
-    conection(login, key){
+    conection(login, key, hostname, port,databases){
         
         const con = mysql.createConnection({
-            host: 'localhost',
-            port: '3306',
+            host: hostname,
+            port: port,
             user: login,
             password: key,
-            database: 'dbsenac'
+            database: databases
         })
         
         return con
